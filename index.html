@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DJ J Santtos | DJ para casamento, 15 anos e festas em Salvador</title>
+<meta name="description" content="DJ J Santtos leva som e iluminação para casamento, 15 anos, aniversário e eventos em Salvador, Bahia. Peça seu orçamento pelo WhatsApp.">
+<meta property="og:title" content="DJ J Santtos | Faça a sua festa um sucesso!">
+<meta property="og:description" content="Som e iluminação para casamento, 15 anos, aniversário e eventos em Salvador.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="grid-luz" aria-hidden="true"></div>
+<div class="orb o1" aria-hidden="true"></div>
+<div class="orb o2" aria-hidden="true"></div>
+<div class="orb o3" aria-hidden="true"></div>
+<div class="escurece" aria-hidden="true"></div>
+<div class="fumaca" aria-hidden="true">
+  <span class="f1"></span><span class="f2"></span><span class="f3"></span><span class="f4"></span>
+</div>
+<canvas id="ledsCanvas" aria-hidden="true"></canvas>
+
+<!-- Patinho (marca do DJ), desenhado em SVG e reaproveitado -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="pato" viewBox="0 0 100 100">
+    <ellipse cx="48" cy="68" rx="34" ry="22" fill="#ffd21f"/>
+    <path d="M18 62c-8-6-10-14-8-18 6 2 12 6 14 12z" fill="#ffd21f"/>
+    <circle cx="68" cy="38" r="19" fill="#ffd21f"/>
+    <ellipse cx="88" cy="43" rx="11" ry="6" fill="#ff8a1f"/>
+    <circle cx="72" cy="33" r="3.4" fill="#1a1020"/>
+    <path d="M34 66c8 8 22 8 30 0-6 12-24 12-30 0z" fill="#e6b400"/>
+  </symbol>
+</svg>
+
+<header class="topo">
+  <a class="marca" href="#inicio" aria-label="DJ J Santtos, início"><svg class="ico"><use href="#pato"/></svg>DJ J Santtos</a>
+  <nav aria-label="Seções">
+    <a href="#orcamento">Orçamento</a><a href="#pacotes">Pacotes</a><a href="#galeria">Galeria</a><a href="#vinil">Noite do Vinil</a>
+  </nav>
+</header>
+
+<main id="inicio">
+<section class="hero">
+  <div class="hero-texto">
+    <h1>Faça a sua festa um sucesso!</h1>
+    <p>DJ J Santtos leva som e iluminação para casamento, 15 anos, aniversário e eventos em Salvador. Bora fazer essa festa acontecer?</p>
+    <div class="botoes">
+      <a class="btn principal" href="#orcamento">Quero contratar para minha festa</a>
+      <a class="btn" href="#vinil">Noite do Vinil</a>
+    </div>
+  </div>
+  <div class="palco" id="palco" tabindex="0" role="button" aria-label="Disco de vinil: passe o mouse ou toque para tocar">
+    <div class="halo"></div>
+    <div class="giro" id="giro"><div class="disco"><div class="rotulo"><span>DJ J<br>SANTTOS</span></div></div></div>
+    <svg class="pato-hero"><use href="#pato"/></svg>
+    <div class="braco"></div>
+    <p class="dica">Passe o mouse no disco. No celular, toque.</p>
+  </div>
+</section>
+
+<section id="orcamento">
+  <h2>Orçamento em 30 segundos</h2>
+  <p class="intro">Responda quatro perguntas rápidas. No final, a mensagem já vai pronta para o WhatsApp do DJ.</p>
+  <div class="painel">
+    <div class="trilho"><div id="barra"></div></div>
+    <div id="passo" aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="pacotes">
+  <h2>Escolha o clima da sua festa</h2>
+  <div class="pacotes">
+    <article class="pac som">
+      <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <h3>Som</h3>
+      <p>Equipamento de som para a pista, o cerimonial e o jantar, com seleção musical combinada com você.</p>
+      <button type="button" class="btn" data-pacote="Som">Pedir este pacote</button>
+    </article>
+    <article class="pac luz">
+      <div class="feixe" aria-hidden="true"></div>
+      <h3>Iluminação</h3>
+      <p>Luz de balada e luz cênica para transformar o espaço da festa, dentro e fora do salão.</p>
+      <button type="button" class="btn" data-pacote="Iluminação">Pedir este pacote</button>
+    </article>
+    <article class="pac completo">
+      <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div class="feixe" aria-hidden="true"></div>
+      <h3>Completo</h3>
+      <p>Som e iluminação juntos, com o DJ cuidando da festa inteira do começo ao fim.</p>
+      <button type="button" class="btn principal" data-pacote="Completo">Pedir este pacote</button>
+    </article>
+  </div>
+</section>
+
+<section id="galeria">
+  <h2>Festas que já rolaram</h2>
+  <div class="filtros">
+    <button type="button" class="filtro" data-t="todos" data-cor="#8a35ff" aria-pressed="true">Todas</button>
+    <button type="button" class="filtro" data-t="casamento" data-cor="#e8b04a" aria-pressed="false">Casamento</button>
+    <button type="button" class="filtro" data-t="15anos" data-cor="#ff2e93" aria-pressed="false">15 anos</button>
+    <button type="button" class="filtro" data-t="aniversario" data-cor="#ffd21f" aria-pressed="false">Aniversário</button>
+    <button type="button" class="filtro" data-t="vinil" data-cor="#ff7a2f" aria-pressed="false">Noite do Vinil</button>
+  </div>
+  <!-- Para usar foto real: troque o conteúdo de cada .tile por <img src="imagens/foto1.jpg" alt="..." loading="lazy"> -->
+  <div class="mosaico">
+    <div class="tile t-cas alto" data-t="casamento"><span>Foto de casamento</span></div>
+    <div class="tile t-15" data-t="15anos"><span>Foto de 15 anos</span></div>
+    <div class="tile t-vin" data-t="vinil"><span>Foto da Noite do Vinil</span></div>
+    <div class="tile t-ani" data-t="aniversario"><span>Foto de aniversário</span></div>
+    <div class="tile t-cas largo" data-t="casamento"><span>Foto de casamento</span></div>
+    <div class="tile t-vin alto" data-t="vinil"><span>Foto da Noite do Vinil</span></div>
+    <div class="tile t-15" data-t="15anos"><span>Foto de 15 anos</span></div>
+    <div class="tile t-ani" data-t="aniversario"><span>Foto de aniversário</span></div>
+  </div>
+</section>
+
+<div class="vinil-fundo">
+<section id="vinil">
+  <h2>Noite do Vinil</h2>
+  <p class="intro">Uma festa só com discos de vinil: clássicos de várias épocas, tocados ao vivo por DJ J Santtos e DJ Manu Mendes. Puxe um disco da estante.</p>
+  <div class="estante">
+    <button type="button" class="capa c1" data-frase="Noite Dourada: pista cheia de clássico dançante." aria-label="Capa Noite Dourada"><span class="lp"></span><b>Noite Dourada</b></button>
+    <button type="button" class="capa c2" data-frase="Pista Cheia: aquele disco que ninguém fica sentado." aria-label="Capa Pista Cheia"><span class="lp"></span><b>Pista Cheia</b></button>
+    <button type="button" class="capa c3" data-frase="Lado B: as faixas que só quem ama vinil conhece." aria-label="Capa Lado B"><span class="lp"></span><b>Lado B</b></button>
+    <button type="button" class="capa c4" data-frase="Anos 80: refrão para cantar junto de olho fechado." aria-label="Capa Anos 80"><span class="lp"></span><b>Anos 80</b></button>
+    <button type="button" class="capa c5" data-frase="Flashback: a trilha da sua adolescência, no chiado do vinil." aria-label="Capa Flashback"><span class="lp"></span><b>Flashback</b></button>
+  </div>
+  <p id="frase" aria-live="polite">Escolha uma capa e puxe o disco.</p>
+  <a class="btn principal" id="zapVinil" href="#">Falar sobre a Noite do Vinil</a>
+</section>
+</div>
+
+<section id="depoimentos">
+  <h2>Quem contratou, recomenda</h2>
+  <!-- Troque os textos abaixo pelos feedbacks reais do destaque "Feedback" do Instagram -->
+  <div class="pilha" id="pilha">
+    <blockquote class="dep"><p>Depoimento de exemplo: troque por um feedback real de cliente.</p><cite>Nome do cliente, casamento</cite></blockquote>
+    <blockquote class="dep"><p>Depoimento de exemplo: conte como foi a pista, a luz e o atendimento.</p><cite>Nome do cliente, 15 anos</cite></blockquote>
+    <blockquote class="dep"><p>Depoimento de exemplo: aqui entra o terceiro feedback.</p><cite>Nome do cliente, aniversário</cite></blockquote>
+  </div>
+  <button type="button" class="btn" id="proximo">Próximo depoimento</button>
+</section>
+
+<section id="atua">
+  <h2>Onde o DJ toca</h2>
+  <p class="intro">Salvador e região. Passe o mouse ou toque nos pontos. Fora da lista? Pergunte pelo WhatsApp.</p>
+  <!-- Edite os pontos (data-n, left, top) conforme os locais reais de atuação -->
+  <div class="mapa">
+    <svg viewBox="0 0 100 62" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0H62C58 14 66 22 60 34S52 50 58 62H0Z" fill="#1d1230"/><path d="M62 0C58 14 66 22 60 34S52 50 58 62" fill="none" stroke="#ff2e93" stroke-width=".5" stroke-dasharray="1.5 1"/></svg>
+    <button type="button" class="ponto" data-n="Centro e Cidade Baixa" style="left:34%;top:62%">1</button>
+    <button type="button" class="ponto" data-n="Barra e Ondina" style="left:50%;top:78%">2</button>
+    <button type="button" class="ponto" data-n="Pituba e Itaigara" style="left:42%;top:42%">3</button>
+    <button type="button" class="ponto" data-n="Itapuã e Praia do Flamengo" style="left:62%;top:22%">4</button>
+    <button type="button" class="ponto" data-n="Lauro de Freitas" style="left:76%;top:12%">5</button>
+    <button type="button" class="ponto" data-n="Buraquinho" style="left:84%;top:34%">6</button>
+    <p id="local">Escolha um ponto no mapa.</p>
+  </div>
+</section>
+
+<section id="sobre">
+  <div class="sobre">
+    <div class="foto" role="img" aria-label="Espaço para a foto do DJ J Santtos"><svg class="ico"><use href="#pato"/></svg><span>Foto do DJ</span></div>
+    <div>
+      <h2>Quem toca a sua festa</h2>
+      <p>DJ J Santtos cuida do som e da luz do começo ao fim. Em festa grande ou pequena, o objetivo é o mesmo: pista cheia e todo mundo feliz.</p>
+      <p>Quando o assunto é vinil, ele troca a mesa por duas vitrolas e leva o público para a Noite do Vinil.</p>
+    </div>
+  </div>
+</section>
+
+<section id="mj">
+  <div class="mj-card">
+    <div class="luva-mj" aria-hidden="true"></div>
+    <h3>King of Pop</h3>
+    <p>Inspirado no Rei do Pop: luva sequinada, passo moonwalk e a magia de uma pista cheia. "Don't stop 'til you get enough" — a festa não para.</p>
+    <p class="moonwalk" style="margin-top:1rem;font-size:1.4rem;color:var(--pato)">🕺 moonwalk</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <svg class="ico grande"><use href="#pato"/></svg>
+  <p><strong>DJ J Santtos</strong> · Salvador, Bahia</p>
+  <p><a id="zapRodape" href="#">WhatsApp</a> · <a href="https://instagram.com/djjsanttos" target="_blank" rel="noopener">Instagram @djjsanttos</a></p>
+</footer>
+
+<a class="fab" id="fab" href="#" aria-label="Chamar no WhatsApp"><svg><use href="#pato"/></svg></a>
+
+<script src="script.js"></script>
+</body>
+</html>
