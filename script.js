@@ -283,7 +283,7 @@
     if (local && pontos[indice]) {
       const bairro = pontos[indice].dataset.bairros;
       const nome = pontos[indice].dataset.n;
-      local.innerHTML = `<span class="mapa-info-icone" aria-hidden="true">📍</span><span><strong>${nome}</strong><br><small>${bairro}</small></span>`;
+      local.innerHTML = `<span class="mapa-info-icone" aria-hidden="true">📍</span><span><strong>${nome}</strong><span class="mapa-info-sep"> • </span><small>${bairro}</small></span>`;
     }
   }
   

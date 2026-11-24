@@ -148,6 +148,7 @@ section{max-width:1100px;margin:auto;padding:clamp(3.5rem,9vw,7rem) 1.25rem}
 .ponto:hover .ponto-tooltip,.ponto:focus-visible .ponto-tooltip,.ponto.ativo .ponto-tooltip{opacity:1;visibility:visible;transform:translateX(-50%) translateY(-6px)}
 .mapa-info{position:absolute;left:1rem;bottom:1rem;right:1rem;background:rgba(11,7,19,.95);backdrop-filter:blur(10px);border:1px solid #3a2859;border-radius:14px;padding:1rem 1.2rem;font:1rem 'Bowlby One',sans-serif;color:var(--pato);display:flex;align-items:center;gap:.7rem;min-height:3.5rem;box-shadow:0 8px 32px rgba(0,0,0,.4)}
 .mapa-info-icone{font-size:1.3rem;flex-shrink:0}
+.mapa-info-sep{display:none}
 .mapa-lista{list-style:none;padding:0;margin:0;display:grid;gap:.5rem}
 .mapa-lista li{background:var(--painel);border:1px solid #3a2859;border-radius:14px;padding:1rem 1.2rem;cursor:pointer;transition:transform .2s,background .2s,border-color .2s,box-shadow .2s;display:flex;align-items:center;gap:.8rem}
 .mapa-lista li:hover,.mapa-lista li:focus-visible{transform:translateX(6px);background:#1d1330;border-color:var(--rosa);box-shadow:0 8px 24px rgba(255,46,147,.2)}
@@ -155,6 +156,30 @@ section{max-width:1100px;margin:auto;padding:clamp(3.5rem,9vw,7rem) 1.25rem}
 .lista-num{width:2rem;height:2rem;border-radius:50%;background:var(--rosa);color:#0b0713;font:700 .9rem 'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 12px var(--rosa)}
 .mapa-lista li small{display:block;margin-top:.2rem;color:var(--suave);font-size:.8rem;line-height:1.4}
 .mapa-lista li.ativo small{color:var(--pato)}
+
+/* MAPA - Mobile */
+@media(max-width:899px){
+  .mapa-wrapper{grid-template-columns:1fr}
+  .mapa{aspect-ratio:4/3;max-width:100%}
+  .ponto{width:2.4rem;height:2.4rem;margin:-1.2rem;font-size:.9rem}
+  .ponto-tooltip{display:none}
+  .mapa-info{left:.5rem;right:.5rem;bottom:.5rem;padding:.7rem 1rem;font-size:.9rem;min-height:auto;flex-wrap:wrap}
+  .mapa-info br{display:none}
+  .mapa-info-sep{display:inline}
+  .mapa-info small{display:inline;margin-left:0;font-size:.75rem}
+  .mapa-lista{grid-template-columns:repeat(2,1fr);gap:.4rem}
+  .mapa-lista li{padding:.7rem .9rem}
+  .lista-num{width:1.8rem;height:1.8rem;font-size:.8rem}
+  .mapa-lista li small{font-size:.7rem}
+}
+@media(max-width:480px){
+  .mapa-lista{grid-template-columns:1fr}
+  .mapa-lista li{flex-wrap:wrap;gap:.4rem}
+  .mapa-lista li small{width:100%;margin-top:0}
+}
+@media(max-width:600px){
+  .mapa{display:none}
+}
 
 /* SOBRE */
 .sobre{display:grid;gap:2rem;align-items:center}
