@@ -217,6 +217,19 @@
     });
   });
 
+  // ---------- Galeria: tiles de casamento abrem modal ----------
+  $$('.tile[data-t="casamento"]').forEach((tile) => {
+    tile.addEventListener('click', () => {
+      abrirModal(0);
+    });
+    tile.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        abrirModal(0);
+      }
+    });
+  });
+
   // ---------- Pacotes: escolher pacote -> WhatsApp ----------
   $$('.pacotes button[data-pacote]').forEach((botao) => {
     botao.addEventListener('click', () => {
@@ -262,12 +275,26 @@
   // ---------- Mapa: pontos ----------
   const pontos = $$('.ponto');
   const local = $('#local');
-  pontos.forEach((ponto) => {
-    ponto.addEventListener('click', () => {
-      pontos.forEach((p) => p.classList.remove('ativo'));
-      ponto.classList.add('ativo');
-      if (local) local.textContent = ponto.dataset.n;
-    });
+  const listaItens = $$('.mapa-lista li');
+  
+  function ativarRegiao(indice) {
+    pontos.forEach((p, i) => p.classList.toggle('ativo', i === indice));
+    listaItens.forEach((li, i) => li.classList.toggle('ativo', i === indice));
+    if (local && pontos[indice]) {
+      const bairro = pontos[indice].dataset.bairros;
+      const nome = pontos[indice].dataset.n;
+      local.innerHTML = `<span class="mapa-info-icone" aria-hidden="true">📍</span><span><strong>${nome}</strong><br><small>${bairro}</small></span>`;
+    }
+  }
+  
+  pontos.forEach((ponto, i) => {
+    ponto.addEventListener('click', () => ativarRegiao(i));
+    ponto.addEventListener('mouseenter', () => ativarRegiao(i));
+  });
+  
+  listaItens.forEach((li, i) => {
+    li.addEventListener('click', () => ativarRegiao(i));
+    li.addEventListener('mouseenter', () => ativarRegiao(i));
   });
 
   // ---------- WhatsApp: preencher links do rodapé/FAB ----------
@@ -279,7 +306,219 @@
     zapVinil.href = textoWhatsApp(textoRodape);
   }
 
-  // ---------- Orçamento: formulário em 3 etapas ----------
+  // ---------- Modal Álbum de Casamento ----------
+  const modalCasamento = $('#modalCasamento');
+  const modalVisualizador = $('#modalVisualizador');
+  const modalMiniaturas = $('#modalMiniaturas');
+  const modalControles = $('#modalControles');
+  const modalContador = $('#modalContador');
+  const btnFechar = $('.modal-fechar', modalCasamento);
+  const btnAnterior = $('#btnAnterior');
+  const btnProximo = $('#btnProximo');
+  const btnPlayPause = $('#btnPlayPause');
+  const volumeSlider = $('#volumeSlider');
+  const btnTelaCheia = $('#btnTelaCheia');
+  const controlesVideo = $('#controlesVideo');
+  const icoPlay = $('.ico-play', btnPlayPause);
+  const icoPause = $('.ico-pause', btnPlayPause);
+
+  // Lista de mídias do casamento (fotos e vídeos)
+  const midiasCasamento = [
+    { tipo: 'video', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.29.43.mp4', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.29.43.mp4' },
+    { tipo: 'video', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.30.23.mp4', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.30.23.mp4' },
+    { tipo: 'video', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.42.48.mp4', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.42.48.mp4' },
+    { tipo: 'video', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.42.48 (1).mp4', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.42.48 (1).mp4' },
+    { tipo: 'video', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.42.49.mp4', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.42.49.mp4' },
+    { tipo: 'video', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.42.59.mp4', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.42.59.mp4' },
+    { tipo: 'video', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.42.59 (1).mp4', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.42.59 (1).mp4' },
+    { tipo: 'video', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.51.06.mp4', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.51.06.mp4' },
+    { tipo: 'video', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.51.07.mp4', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.51.07.mp4' },
+    { tipo: 'video', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.51.09.mp4', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.51.09.mp4' },
+    { tipo: 'video', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.51.09 (1).mp4', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.51.09 (1).mp4' },
+    { tipo: 'video', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.52.47.mp4', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 21.52.47.mp4' },
+    { tipo: 'video', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 22.23.42.mp4', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Video 2026-11-23 at 22.23.42.mp4' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.24.jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.24.jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.24 (1).jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.24 (1).jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.24 (2).jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.24 (2).jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.24 (3).jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.24 (3).jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.24 (4).jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.24 (4).jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.25.jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.25.jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.25 (1).jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.25 (1).jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.25 (2).jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.25 (2).jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.25 (3).jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.25 (3).jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.26.jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.26.jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.26 (1).jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.26 (1).jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.42.49.jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.42.49.jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.42.59.jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.42.59.jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.42.59 (1).jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.42.59 (1).jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.42.59 (2).jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.42.59 (2).jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.43.00.jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.43.00.jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 22.02.32.jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 22.02.32.jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 22.02.32 (1).jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 22.02.32 (1).jpeg' },
+  ];
+
+  let indiceAtual = 0;
+  let videoAtual = null;
+
+  function abrirModal(indice = 0) {
+    indiceAtual = indice;
+    modalCasamento.hidden = false;
+    document.body.style.overflow = 'hidden';
+    renderMiniaturas();
+    mostrarMidia(indiceAtual);
+    btnFechar.focus();
+  }
+
+  function fecharModal() {
+    modalCasamento.hidden = true;
+    document.body.style.overflow = '';
+    if (videoAtual) {
+      videoAtual.pause();
+      videoAtual = null;
+    }
+    controlesVideo.hidden = true;
+  }
+
+  function renderMiniaturas() {
+    modalMiniaturas.innerHTML = '';
+    midiasCasamento.forEach((midia, i) => {
+      const thumb = document.createElement(midia.tipo === 'video' ? 'video' : 'img');
+      thumb.src = midia.thumb;
+      thumb.alt = `Miniatura ${i + 1}`;
+      thumb.dataset.index = i;
+      if (midia.tipo === 'video') {
+        thumb.muted = true;
+        thumb.preload = 'metadata';
+      }
+      thumb.addEventListener('click', () => {
+        indiceAtual = i;
+        mostrarMidia(indiceAtual);
+        atualizarMiniaturas();
+      });
+      modalMiniaturas.appendChild(thumb);
+    });
+    atualizarMiniaturas();
+  }
+
+  function atualizarMiniaturas() {
+    $$('img, video', modalMiniaturas).forEach((el, i) => {
+      el.classList.toggle('ativo', i === indiceAtual);
+    });
+  }
+
+  function mostrarMidia(indice) {
+    const midia = midiasCasamento[indice];
+    modalVisualizador.innerHTML = '';
+    controlesVideo.hidden = true;
+
+    if (videoAtual) {
+      videoAtual.pause();
+      videoAtual.removeEventListener('ended', proximoMidia);
+      videoAtual = null;
+    }
+    icoPlay.hidden = false;
+    icoPause.hidden = true;
+
+    if (midia.tipo === 'imagem') {
+      const img = document.createElement('img');
+      img.src = midia.src;
+      img.alt = `Foto de casamento ${indice + 1}`;
+      img.loading = 'lazy';
+      modalVisualizador.appendChild(img);
+    } else if (midia.tipo === 'video') {
+      const video = document.createElement('video');
+      video.src = midia.src;
+      video.controls = false;
+      video.preload = 'metadata';
+      video.playsInline = true;
+      modalVisualizador.appendChild(video);
+      videoAtual = video;
+      controlesVideo.hidden = false;
+      volumeSlider.value = 1;
+      video.volume = 1;
+
+      video.addEventListener('click', togglePlayPause);
+      video.addEventListener('ended', proximoMidia);
+      btnPlayPause.onclick = togglePlayPause;
+      volumeSlider.oninput = () => { video.volume = volumeSlider.value; };
+      btnTelaCheia.onclick = () => {
+        if (video.requestFullscreen) video.requestFullscreen();
+        else if (video.webkitRequestFullscreen) video.webkitRequestFullscreen();
+        else if (video.msRequestFullscreen) video.msRequestFullscreen();
+      };
+    }
+
+    modalContador.textContent = `${indice + 1} de ${midiasCasamento.length}`;
+    atualizarMiniaturas();
+    atualizarBotoesNavegacao();
+  }
+
+  function togglePlayPause() {
+    if (!videoAtual) return;
+    if (videoAtual.paused) {
+      videoAtual.play();
+      icoPlay.hidden = true;
+      icoPause.hidden = false;
+    } else {
+      videoAtual.pause();
+      icoPlay.hidden = false;
+      icoPause.hidden = true;
+    }
+  }
+
+  function proximoMidia() {
+    if (indiceAtual < midiasCasamento.length - 1) {
+      indiceAtual++;
+      mostrarMidia(indiceAtual);
+    }
+  }
+
+  function anteriorMidia() {
+    if (indiceAtual > 0) {
+      indiceAtual--;
+      mostrarMidia(indiceAtual);
+    }
+  }
+
+  function atualizarBotoesNavegacao() {
+    btnAnterior.disabled = indiceAtual === 0;
+    btnProximo.disabled = indiceAtual === midiasCasamento.length - 1;
+    btnAnterior.style.opacity = indiceAtual === 0 ? '0.4' : '1';
+    btnProximo.style.opacity = indiceAtual === midiasCasamento.length - 1 ? '0.4' : '1';
+  }
+
+  // Event listeners do modal
+  btnFechar.addEventListener('click', fecharModal);
+  modalCasamento.querySelector('.modal-overlay').addEventListener('click', fecharModal);
+  btnAnterior.addEventListener('click', anteriorMidia);
+  btnProximo.addEventListener('click', proximoMidia);
+
+  // Teclado
+  document.addEventListener('keydown', (e) => {
+    if (modalCasamento.hidden) return;
+    if (e.key === 'Escape') fecharModal();
+    else if (e.key === 'ArrowLeft') anteriorMidia();
+    else if (e.key === 'ArrowRight') proximoMidia();
+    else if (e.key === ' ' && videoAtual) {
+      e.preventDefault();
+      togglePlayPause();
+    }
+  });
+
+  // ---------- Galeria: filtro Casamento abre modal ----------
+  const filtroCasamento = $('[data-t="casamento"]', document.querySelector('.filtros'));
+  if (filtroCasamento) {
+    filtroCasamento.addEventListener('click', (e) => {
+      e.preventDefault();
+      // Não filtrar, abrir modal
+      abrirModal(0);
+      // Manter o botão "Todas" pressionado
+      $$('.filtro').forEach((b) => b.setAttribute('aria-pressed', b.dataset.t === 'todos'));
+      tiles.forEach((tile) => { tile.hidden = false; });
+    });
+  }
+
+  // ---------- Pacotes: escolher pacote -> WhatsApp ----------
   const passoEl = $('#passo');
   const barra = $('#barra');
   if (passoEl) {

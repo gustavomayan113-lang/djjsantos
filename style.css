@@ -97,6 +97,7 @@ section{max-width:1100px;margin:auto;padding:clamp(3.5rem,9vw,7rem) 1.25rem}
 .tile:hover{transform:scale(1.03) rotate(-.6deg)}
 .tile[hidden]{display:none}
 .tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tile[data-t="casamento"]{cursor:pointer}
 .tile span{position:relative;background:rgba(0,0,0,.45);padding:.2rem .6rem;border-radius:999px}
 .alto{grid-row:span 2}.largo{grid-column:span 2}
 .t-cas{background:linear-gradient(150deg,#e8b04a,#8c3b5f)}
@@ -129,18 +130,43 @@ section{max-width:1100px;margin:auto;padding:clamp(3.5rem,9vw,7rem) 1.25rem}
 .dep.sai{transform:translateX(-120%) rotate(-14deg)!important;opacity:0}
 
 /* ONDE ATUA */
+.mapa-wrapper{display:grid;gap:1.5rem}
+@media(min-width:900px){.mapa-wrapper{grid-template-columns:1fr 320px;align-items:start}}
 .mapa{position:relative;aspect-ratio:16/10;max-width:760px;border-radius:24px;overflow:hidden;border:1px solid #3a2859;background:#0f0919}
 .mapa svg{position:absolute;inset:0;width:100%;height:100%}
-.ponto{position:absolute;width:2.4rem;height:2.4rem;margin:-1.2rem;border-radius:50%;border:2px solid var(--pato);background:#0b0713;color:var(--pato);font:700 .9rem 'DM Sans',sans-serif;cursor:pointer;transition:transform .2s,background .2s,box-shadow .2s}
-.ponto:hover,.ponto:focus-visible,.ponto.ativo{transform:scale(1.25);background:var(--pato);color:#0b0713;box-shadow:0 0 28px var(--pato)}
-#local{position:absolute;left:1rem;bottom:.8rem;font:1.1rem 'Bowlby One',sans-serif;color:var(--pato)}
+.mapa-bg{filter:drop-shadow(0 0 30px color-mix(in srgb,var(--roxo) 40%,transparent))}
+.mapa-pulso{animation:pulsoMapa 3s ease-out infinite}
+@keyframes pulsoMapa{0%{transform:scale(0.5);opacity:0.6}100%{transform:scale(2.5);opacity:0}}
+.ponto{position:absolute;width:2.8rem;height:2.8rem;margin:-1.4rem;border-radius:50%;border:2px solid var(--pato);background:#0b0713;color:var(--pato);font:700 1rem 'DM Sans',sans-serif;cursor:pointer;transition:transform .3s cubic-bezier(.3,1.4,.5,1),background .2s,box-shadow .2s,border-color .2s;display:flex;align-items:center;justify-content:center;z-index:2}
+.ponto::before{content:'';position:absolute;inset:-6px;border-radius:50%;background:var(--pato);opacity:0;transition:opacity .3s;animation:pontoRipple 2.5s ease-out infinite}
+@keyframes pontoRipple{0%{transform:scale(1);opacity:0.4}100%{transform:scale(2.5);opacity:0}}
+.ponto:hover::before,.ponto:focus-visible::before,.ponto.ativo::before{opacity:0.3;animation:none}
+.ponto:hover,.ponto:focus-visible,.ponto.ativo{transform:scale(1.35);background:var(--pato);color:#0b0713;box-shadow:0 0 32px var(--pato),0 0 60px color-mix(in srgb,var(--pato) 40%,transparent);border-color:var(--pato);z-index:5}
+.ponto-num{position:relative;z-index:1}
+.ponto-tooltip{position:absolute;bottom:120%;left:50%;transform:translateX(-50%);white-space:nowrap;background:var(--painel);color:var(--texto);padding:.5rem 1rem;border-radius:999px;font:600 .85rem 'DM Sans',sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.4);border:1px solid #3a2859;opacity:0;visibility:hidden;transition:opacity .2s,transform .2s,visibility .2s;pointer-events:none;z-index:10}
+.ponto-tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--painel)}
+.ponto:hover .ponto-tooltip,.ponto:focus-visible .ponto-tooltip,.ponto.ativo .ponto-tooltip{opacity:1;visibility:visible;transform:translateX(-50%) translateY(-6px)}
+.mapa-info{position:absolute;left:1rem;bottom:1rem;right:1rem;background:rgba(11,7,19,.95);backdrop-filter:blur(10px);border:1px solid #3a2859;border-radius:14px;padding:1rem 1.2rem;font:1rem 'Bowlby One',sans-serif;color:var(--pato);display:flex;align-items:center;gap:.7rem;min-height:3.5rem;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.mapa-info-icone{font-size:1.3rem;flex-shrink:0}
+.mapa-lista{list-style:none;padding:0;margin:0;display:grid;gap:.5rem}
+.mapa-lista li{background:var(--painel);border:1px solid #3a2859;border-radius:14px;padding:1rem 1.2rem;cursor:pointer;transition:transform .2s,background .2s,border-color .2s,box-shadow .2s;display:flex;align-items:center;gap:.8rem}
+.mapa-lista li:hover,.mapa-lista li:focus-visible{transform:translateX(6px);background:#1d1330;border-color:var(--rosa);box-shadow:0 8px 24px rgba(255,46,147,.2)}
+.mapa-lista li.ativo{background:linear-gradient(90deg,color-mix(in srgb,var(--rosa) 15%,transparent),var(--painel));border-color:var(--rosa);box-shadow:0 0 20px color-mix(in srgb,var(--rosa) 30%,transparent)}
+.lista-num{width:2rem;height:2rem;border-radius:50%;background:var(--rosa);color:#0b0713;font:700 .9rem 'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 12px var(--rosa)}
+.mapa-lista li small{display:block;margin-top:.2rem;color:var(--suave);font-size:.8rem;line-height:1.4}
+.mapa-lista li.ativo small{color:var(--pato)}
 
 /* SOBRE */
 .sobre{display:grid;gap:2rem;align-items:center}
 @media(min-width:760px){.sobre{grid-template-columns:.8fr 1.2fr}}
 .sobre p{color:var(--suave);margin-top:.8rem;max-width:56ch}
-.foto{aspect-ratio:4/5;max-width:340px;border-radius:200px 200px 24px 24px;background:linear-gradient(160deg,var(--roxo),var(--rosa));display:grid;place-content:center;justify-items:center;gap:.4rem;font-size:.9rem}
-.foto .ico{width:5rem;height:5rem}
+.foto{aspect-ratio:4/5;max-width:340px;border-radius:200px 200px 24px 24px;background:linear-gradient(160deg,var(--roxo),var(--rosa));overflow:hidden}
+.foto img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* NOITE DO VINIL - Foto do DJ com moldura */
+.vinil-foto{margin-bottom:2rem;display:flex;justify-content:center}
+.vinil-foto-moldura{width:100%;max-width:320px;aspect-ratio:4/5;border-radius:200px 200px 24px 24px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.5),0 0 0 4px color-mix(in srgb,var(--pato) 40%,transparent);background:linear-gradient(160deg,var(--roxo),var(--rosa))}
+.vinil-foto-moldura img{width:100%;height:100%;object-fit:cover}
 
 footer{text-align:center;padding:3rem 1rem 6rem;border-top:1px solid #2a1d40;color:var(--suave)}
 footer .ico{margin:auto}
@@ -222,3 +248,35 @@ body.boate h1,body.boate h2{animation:neonPulse .4s ease-in-out infinite alterna
 .mj-card p{color:var(--suave);max-width:60ch;margin:auto}
 .moonwalk{display:inline-block;animation:moonwalk 2s ease-in-out infinite}
 @keyframes moonwalk{0%{transform:translateX(0)}50%{transform:translateX(-30px)}100%{transform:translateX(0)}}
+
+/* MODAL ÁLBUM DE CASAMENTO */
+.modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem}
+.modal[hidden]{display:none}
+.modal-overlay{position:absolute;inset:0;background:rgba(0,0,0,.95);backdrop-filter:blur(8px)}
+.modal-conteudo{position:relative;z-index:1;width:100%;max-width:1000px;max-height:90vh;display:flex;flex-direction:column;background:var(--painel);border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 0 1px color-mix(in srgb,var(--rosa) 30%,transparent)}
+.modal-fechar{position:absolute;top:1rem;right:1rem;z-index:2;width:44px;height:44px;border-radius:50%;border:2px solid #3a2859;background:var(--painel);color:var(--texto);font-size:1.8rem;cursor:pointer;display:flex;align-items:center;justify-items:center;transition:transform .2s,background .2s,border-color .2s}
+.modal-fechar:hover{transform:rotate(90deg);background:var(--rosa);border-color:var(--rosa)}
+.modal-cabecalho{padding:1.2rem 1.5rem;border-bottom:1px solid #3a2859;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+.modal-cabecalho h3{margin:0;font-size:1.4rem}
+.modal-contador{color:var(--suave);font-size:.95rem}
+.modal-visualizador{flex:1;overflow:auto;display:flex;align-items:center;justify-content:center;padding:1.5rem;min-height:300px;background:#0a0810}
+.modal-visualizador img{max-width:100%;max-height:70vh;object-fit:contain;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.modal-visualizador video{max-width:100%;max-height:70vh;object-fit:contain;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.5);background:#000}
+.modal-controles{display:flex;align-items:center;justify-content:center;gap:1rem;padding:1rem 1.5rem;border-top:1px solid #3a2859;background:rgba(11,7,19,.8);backdrop-filter:blur(10px)}
+.btn-modal{width:48px;height:48px;border-radius:50%;border:2px solid #3a2859;background:var(--painel);color:var(--texto);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s,border-color .2s}
+.btn-modal:hover{transform:scale(1.1);background:var(--rosa);border-color:var(--rosa)}
+.btn-modal:focus-visible{outline:3px solid var(--pato);outline-offset:3px}
+.controles-video{display:flex;align-items:center;gap:.8rem}
+.volume-control{display:flex;align-items:center;gap:.5rem}
+.volume-control input[type=range]{width:100px;accent-color:var(--rosa)}
+.ico-volume{color:var(--suave);flex-shrink:0}
+.modal-miniaturas{display:flex;gap:.6rem;padding:1rem 1.5rem;overflow-x:auto;background:rgba(11,7,19,.9);backdrop-filter:blur(10px);border-top:1px solid #3a2859}
+.modal-miniaturas img,.modal-miniaturas video{width:72px;height:72px;object-fit:cover;border-radius:10px;cursor:pointer;border:2px solid transparent;transition:transform .2s,border-color .2s,opacity .2s;flex-shrink:0}
+.modal-miniaturas img:hover,.modal-miniaturas video:hover{transform:scale(1.08);border-color:var(--pato)}
+.modal-miniaturas img.ativo,.modal-miniaturas video.ativo{border-color:var(--rosa);box-shadow:0 0 12px color-mix(in srgb,var(--rosa) 50%,transparent)}
+.modal-miniaturas video{background:#000}
+
+/* Garantir que o modal feche com ESC */
+@media(prefers-reduced-motion:reduce){
+  .modal-miniaturas img,.modal-miniaturas video{transition:none}
+}

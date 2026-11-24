@@ -107,11 +107,15 @@
   </div>
   <!-- Para usar foto real: troque o conteúdo de cada .tile por <img src="imagens/foto1.jpg" alt="..." loading="lazy"> -->
   <div class="mosaico">
-    <div class="tile t-cas alto" data-t="casamento"><span>Foto de casamento</span></div>
+    <div class="tile t-cas alto" data-t="casamento" tabindex="0" role="button" aria-label="Ver álbum de casamento">
+      <img src="imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.30.24.jpeg" alt="Casamento" loading="lazy">
+    </div>
     <div class="tile t-15" data-t="15anos"><span>Foto de 15 anos</span></div>
     <div class="tile t-vin" data-t="vinil"><span>Foto da Noite do Vinil</span></div>
     <div class="tile t-ani" data-t="aniversario"><span>Foto de aniversário</span></div>
-    <div class="tile t-cas largo" data-t="casamento"><span>Foto de casamento</span></div>
+    <div class="tile t-cas largo" data-t="casamento" tabindex="0" role="button" aria-label="Ver álbum de casamento">
+      <img src="imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.42.59.jpeg" alt="Casamento" loading="lazy">
+    </div>
     <div class="tile t-vin alto" data-t="vinil"><span>Foto da Noite do Vinil</span></div>
     <div class="tile t-15" data-t="15anos"><span>Foto de 15 anos</span></div>
     <div class="tile t-ani" data-t="aniversario"><span>Foto de aniversário</span></div>
@@ -122,6 +126,11 @@
 <section id="vinil">
   <h2>Noite do Vinil</h2>
   <p class="intro">Uma festa só com discos de vinil: clássicos de várias épocas, tocados ao vivo por DJ J Santtos e DJ Manu Mendes. Puxe um disco da estante.</p>
+  <div class="vinil-foto" aria-label="DJ J Santtos na Noite do Vinil">
+    <div class="vinil-foto-moldura">
+      <img src="imagens/categorias/noite do vinil/foto do dj_aba do vinil.jpeg" alt="DJ J Santtos na Noite do Vinil" loading="lazy">
+    </div>
+  </div>
   <div class="estante">
     <button type="button" class="capa c1" data-frase="Noite Dourada: pista cheia de clássico dançante." aria-label="Capa Noite Dourada"><span class="lp"></span><b>Noite Dourada</b></button>
     <button type="button" class="capa c2" data-frase="Pista Cheia: aquele disco que ninguém fica sentado." aria-label="Capa Pista Cheia"><span class="lp"></span><b>Pista Cheia</b></button>
@@ -148,22 +157,72 @@
 <section id="atua">
   <h2>Onde o DJ toca</h2>
   <p class="intro">Salvador e região. Passe o mouse ou toque nos pontos. Fora da lista? Pergunte pelo WhatsApp.</p>
-  <!-- Edite os pontos (data-n, left, top) conforme os locais reais de atuação -->
-  <div class="mapa">
-    <svg viewBox="0 0 100 62" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0H62C58 14 66 22 60 34S52 50 58 62H0Z" fill="#1d1230"/><path d="M62 0C58 14 66 22 60 34S52 50 58 62" fill="none" stroke="#ff2e93" stroke-width=".5" stroke-dasharray="1.5 1"/></svg>
-    <button type="button" class="ponto" data-n="Centro e Cidade Baixa" style="left:34%;top:62%">1</button>
-    <button type="button" class="ponto" data-n="Barra e Ondina" style="left:50%;top:78%">2</button>
-    <button type="button" class="ponto" data-n="Pituba e Itaigara" style="left:42%;top:42%">3</button>
-    <button type="button" class="ponto" data-n="Itapuã e Praia do Flamengo" style="left:62%;top:22%">4</button>
-    <button type="button" class="ponto" data-n="Lauro de Freitas" style="left:76%;top:12%">5</button>
-    <button type="button" class="ponto" data-n="Buraquinho" style="left:84%;top:34%">6</button>
-    <p id="local">Escolha um ponto no mapa.</p>
+  <div class="mapa-wrapper">
+    <div class="mapa" role="img" aria-label="Mapa de atuação em Salvador e região">
+      <svg viewBox="0 0 100 62" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        <path class="mapa-bg" d="M0 0H62C58 14 66 22 60 34S52 50 58 62H0Z" fill="#1d1230"/>
+        <path class="mapa-contorno" d="M62 0C58 14 66 22 60 34S52 50 58 62" fill="none" stroke="#ff2e93" stroke-width=".5" stroke-dasharray="1.5 1"/>
+        <circle class="mapa-pulso" cx="34" cy="38" r="8" fill="none" stroke="#ffd21f" stroke-width="1.5" opacity="0"/>
+        <circle class="mapa-pulso" cx="50" cy="48" r="8" fill="none" stroke="#ffd21f" stroke-width="1.5" opacity="0" style="animation-delay: 1s"/>
+        <circle class="mapa-pulso" cx="42" cy="26" r="8" fill="none" stroke="#ffd21f" stroke-width="1.5" opacity="0" style="animation-delay: 2s"/>
+        <circle class="mapa-pulso" cx="62" cy="13" r="8" fill="none" stroke="#ffd21f" stroke-width="1.5" opacity="0" style="animation-delay: 3s"/>
+        <circle class="mapa-pulso" cx="76" cy="7" r="8" fill="none" stroke="#ffd21f" stroke-width="1.5" opacity="0" style="animation-delay: 0.5s"/>
+        <circle class="mapa-pulso" cx="84" cy="21" r="8" fill="none" stroke="#ffd21f" stroke-width="1.5" opacity="0" style="animation-delay: 1.5s"/>
+      </svg>
+      <button type="button" class="ponto" data-n="Centro e Cidade Baixa" data-bairros="Comércio, Pelourinho, Saúde, Tororó" style="left:34%;top:62%" aria-label="Centro e Cidade Baixa: Comércio, Pelourinho, Saúde, Tororó">
+        <span class="ponto-num">1</span>
+        <span class="ponto-tooltip">Centro e Cidade Baixa</span>
+      </button>
+      <button type="button" class="ponto" data-n="Barra e Ondina" data-bairros="Barra, Ondina, Rio Vermelho, Amaralina" style="left:50%;top:78%" aria-label="Barra e Ondina: Barra, Ondina, Rio Vermelho, Amaralina">
+        <span class="ponto-num">2</span>
+        <span class="ponto-tooltip">Barra e Ondina</span>
+      </button>
+      <button type="button" class="ponto" data-n="Pituba e Itaigara" data-bairros="Pituba, Itaigara, Caminho das Árvores, Jardim Apipema" style="left:42%;top:42%" aria-label="Pituba e Itaigara: Pituba, Itaigara, Caminho das Árvores, Jardim Apipema">
+        <span class="ponto-num">3</span>
+        <span class="ponto-tooltip">Pituba e Itaigara</span>
+      </button>
+      <button type="button" class="ponto" data-n="Itapuã e Praia do Flamengo" data-bairros="Itapuã, Praia do Flamengo, Stella Maris, Ipitanga" style="left:62%;top:22%" aria-label="Itapuã e Praia do Flamengo: Itapuã, Praia do Flamengo, Stella Maris, Ipitanga">
+        <span class="ponto-num">4</span>
+        <span class="ponto-tooltip">Itapuã e Praia do Flamengo</span>
+      </button>
+      <button type="button" class="ponto" data-n="Lauro de Freitas" data-bairros="Lauro de Freitas, Vilas do Atlântico, Buraquinho, Portão" style="left:76%;top:12%" aria-label="Lauro de Freitas: Lauro de Freitas, Vilas do Atlântico, Buraquinho, Portão">
+        <span class="ponto-num">5</span>
+        <span class="ponto-tooltip">Lauro de Freitas</span>
+      </button>
+      <button type="button" class="ponto" data-n="Buraquinho" data-bairros="Buraquinho, Vilas do Atlântico, Busca Vida, Jauá" style="left:84%;top:34%" aria-label="Buraquinho: Buraquinho, Vilas do Atlântico, Busca Vida, Jauá">
+        <span class="ponto-num">6</span>
+        <span class="ponto-tooltip">Buraquinho</span>
+      </button>
+      <div id="local" class="mapa-info" aria-live="polite">
+        <span class="mapa-info-icone" aria-hidden="true">📍</span>
+        <span>Toque em uma região para ver os bairros</span>
+      </div>
+    </div>
+    <ul class="mapa-lista" aria-label="Lista de regiões de atuação">
+      <li data-target="1"><span class="lista-num">1</span> Centro e Cidade Baixa <small>Comércio, Pelourinho, Saúde, Tororó</small></li>
+      <li data-target="2"><span class="lista-num">2</span> Barra e Ondina <small>Barra, Ondina, Rio Vermelho, Amaralina</small></li>
+      <li data-target="3"><span class="lista-num">3</span> Pituba e Itaigara <small>Pituba, Itaigara, Caminho das Árvores, Jardim Apipema</small></li>
+      <li data-target="4"><span class="lista-num">4</span> Itapuã e Praia do Flamengo <small>Itapuã, Praia do Flamengo, Stella Maris, Ipitanga</small></li>
+      <li data-target="5"><span class="lista-num">5</span> Lauro de Freitas <small>Lauro de Freitas, Vilas do Atlântico, Buraquinho, Portão</small></li>
+      <li data-target="6"><span class="lista-num">6</span> Buraquinho <small>Buraquinho, Vilas do Atlântico, Busca Vida, Jauá</small></li>
+    </ul>
   </div>
 </section>
 
 <section id="sobre">
   <div class="sobre">
-    <div class="foto" role="img" aria-label="Espaço para a foto do DJ J Santtos"><svg class="ico"><use href="#pato"/></svg><span>Foto do DJ</span></div>
+    <div class="foto" role="img" aria-label="Foto do DJ J Santtos">
+      <img src="imagens/categorias/foto do DJ j santos/foto do dj.jpeg" alt="DJ J Santtos" loading="lazy">
+    </div>
     <div>
       <h2>Quem toca a sua festa</h2>
       <p>DJ J Santtos cuida do som e da luz do começo ao fim. Em festa grande ou pequena, o objetivo é o mesmo: pista cheia e todo mundo feliz.</p>
@@ -189,6 +248,37 @@
 </footer>
 
 <a class="fab" id="fab" href="#" aria-label="Chamar no WhatsApp"><svg><use href="#pato"/></svg></a>
+
+<!-- Modal Álbum de Casamento -->
+<div class="modal" id="modalCasamento" role="dialog" aria-modal="true" aria-label="Álbum de Casamento" hidden>
+  <div class="modal-overlay" tabindex="-1"></div>
+  <div class="modal-conteudo">
+    <button type="button" class="modal-fechar" aria-label="Fechar álbum">&times;</button>
+    <div class="modal-cabecalho">
+      <h3>Álbum de Casamento</h3>
+      <p class="modal-contador" id="modalContador">0 de 0</p>
+    </div>
+    <div class="modal-visualizador" id="modalVisualizador"></div>
+    <div class="modal-controles" id="modalControles" hidden>
+      <button type="button" class="btn-modal" id="btnAnterior" aria-label="Anterior">&lsaquo;</button>
+      <div class="controles-video" id="controlesVideo" hidden>
+        <button type="button" class="btn-modal" id="btnPlayPause" aria-label="Play/Pause">
+          <svg class="ico-play" viewBox="0 0 24 24" width="24" height="24"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="ico-pause" viewBox="0 0 24 24" width="24" height="24" hidden><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        <div class="volume-control">
+          <svg class="ico-volume" viewBox="0 0 24 24" width="20" height="20"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+          <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="1" aria-label="Volume">
+        </div>
+        <button type="button" class="btn-modal" id="btnTelaCheia" aria-label="Tela cheia">
+          <svg viewBox="0 0 24 24" width="24" height="24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+        </button>
+      </div>
+      <button type="button" class="btn-modal" id="btnProximo" aria-label="Próximo">&rsaquo;</button>
+    </div>
+    <div class="modal-miniaturas" id="modalMiniaturas" role="list" aria-label="Miniaturas"></div>
+  </div>
+</div>
 
 <script src="script.js"></script>
 </body>
