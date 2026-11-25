@@ -355,6 +355,17 @@
     { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.43.00.jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 21.43.00.jpeg' },
     { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 22.02.32.jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 22.02.32.jpeg' },
     { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 22.02.32 (1).jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-23 at 22.02.32 (1).jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.55.jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.55.jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.55 (1).jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.55 (1).jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.55 (2).jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.55 (2).jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.56.jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.56.jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.56 (1).jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.56 (1).jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.56 (2).jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.56 (2).jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.56 (3).jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.56 (3).jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.56 (4).jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.56 (4).jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.56 (5).jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.56 (5).jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.57.jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.57.jpeg' },
+    { tipo: 'imagem', src: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.57 (1).jpeg', thumb: 'imagens/categorias/fotos e videos casamento/WhatsApp Image 2026-11-24 at 20.52.57 (1).jpeg' },
   ];
 
   let indiceAtual = 0;
