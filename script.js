@@ -3,7 +3,7 @@
 (function () {
   'use strict';
 
-  const WHATSAPP = '5571999999999'; // troque pelo número real do DJ
+  const WHATSAPP = '557191475897'; // troque pelo número real do DJ
 
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
