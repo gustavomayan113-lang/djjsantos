@@ -26,6 +26,15 @@ section{max-width:1100px;margin:auto;padding:clamp(3.5rem,9vw,7rem) 1.25rem}
 .btn:hover{transform:translateY(-3px) rotate(-1deg);box-shadow:0 8px 30px color-mix(in srgb,var(--rosa) 50%,transparent)}
 .btn.principal{background:var(--rosa);border-color:var(--rosa)}
 .botoes{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.6rem}
+.btn.instagram{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);border-color:transparent;color:#fff;position:relative;overflow:hidden}
+.btn.instagram::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,#feda75 0%,#fa7e1e 25%,#d62976 50%,#962fbf 75%,#4f5bd5 100%);opacity:0;transition:opacity .3s}
+.btn.instagram:hover{transform:translateY(-3px) rotate(-1deg);box-shadow:0 8px 30px rgba(219,39,67,.5)}
+.btn.instagram:hover::before{opacity:1}
+.btn.instagram svg{position:relative;z-index:1;flex-shrink:0}
+.btn.instagram span{position:relative;z-index:1}
+.btn.portfolio{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,#00c4cc 0%,#007bff 50%,#6c5ce7 100%);border-color:transparent;color:#fff}
+.btn.portfolio:hover{transform:translateY(-3px) rotate(-1deg);box-shadow:0 8px 30px rgba(0,196,204,.5)}
+.btn.portfolio svg{flex-shrink:0}
 
 /* HERO */
 .hero{display:grid;gap:2rem;align-items:center;min-height:calc(100svh - 3.2rem);padding-top:2rem}
@@ -267,8 +276,15 @@ body.boate h1,body.boate h2{animation:neonPulse .4s ease-in-out infinite alterna
 .luva-mj::before{content:'';position:absolute;inset:3px;border-radius:50% 50% 35% 35%;background:repeating-linear-gradient(45deg,transparent 0 3px,rgba(255,255,255,.5) 3px 6px)}
 .luva-mj::after{content:'MJ';position:absolute;bottom:-.2rem;left:50%;transform:translateX(-50%);font:.6rem 'Bowlby One',sans-serif;color:#0b0713}
 @keyframes luvaBrilha{from{box-shadow:0 0 12px rgba(255,255,255,.4)}to{box-shadow:0 0 28px rgba(255,255,255,.9),0 0 40px var(--pato)}}
-.mj-card{background:linear-gradient(135deg,#1a0a2e,#0b0713);border:2px solid var(--pato);border-radius:20px;padding:2rem;text-align:center;position:relative;overflow:hidden}
-.mj-card::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent 0 8px,color-mix(in srgb,var(--pato) 6%,transparent) 8px 16px);pointer-events:none}
+.mj-card{background:transparent;border:none;border-radius:0;padding:0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:1rem}
+.mj-homenagem{position:relative;width:100%;max-width:360px;aspect-ratio:3/4;flex-shrink:0}
+.mj-poster{position:relative;width:100%;height:100%;border-radius:4px;overflow:hidden}
+.mj-poster img{width:100%;height:100%;object-fit:cover;filter:grayscale(20%) contrast(1.15) saturate(1.1);transition:filter .5s,transform .6s}
+.mj-homenagem:hover .mj-poster img{filter:grayscale(0%) contrast(1.2) saturate(1.25);transform:scale(1.03)}
+.mj-poster-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(11,7,19,.9) 100%);pointer-events:none}
+.mj-poster-texto{position:absolute;bottom:0;left:0;right:0;padding:1.5rem 1.2rem 1rem;display:flex;flex-direction:column;gap:.3rem;text-align:center;pointer-events:none}
+.mj-label{font:'Bowlby One',sans-serif;font-size:1.3rem;color:var(--pato);text-shadow:0 0 20px color-mix(in srgb,var(--pato) 80%,transparent);letter-spacing:.15em}
+.mj-anos{font:600 .85rem 'DM Sans',sans-serif;color:var(--suave);letter-spacing:.1em}
 .mj-card h3{color:var(--pato);font-size:1.8rem;margin-bottom:.5rem}
 .mj-card p{color:var(--suave);max-width:60ch;margin:auto}
 .moonwalk{display:inline-block;animation:moonwalk 2s ease-in-out infinite}
